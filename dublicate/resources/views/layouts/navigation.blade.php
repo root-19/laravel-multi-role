@@ -11,17 +11,16 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('home') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('post')" :active="request()->routeIs('post')">
-                        {{ __('post') }}
-                    </x-nav-link>
-                    {{-- <x-nav-link :href="route('quiz')" :active="request()->routeIs('quiz')">
-                        {{ __('quiz') }}
-                    </x-nav-link> --}}
-                </div>
+                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{ __('home') }}
+                </x-nav-link>
+                <x-nav-link :href="route('welcome.post')" :active="request()->routeIs('welcome.post')">
+                    {{ __('post') }}
+                </x-nav-link>
+                <x-nav-link :href="route('welcome.create')" :active="request()->routeIs('welcome.create')">
+                    {{ __('create') }}
+                </x-nav-link>
+                
             </div>
 
             <!-- Settings Dropdown -->
@@ -76,8 +75,11 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('home') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('post')" :active="request()->routeIs('post')">
+            <x-responsive-nav-link :href="route('welcome.post')" :active="request()->routeIs('welcome.post')">
                 {{ __('post') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('welcome.create')" :active="request()->routeIs('welcome.create')">
+                {{ __('create') }}
             </x-responsive-nav-link>
            
            

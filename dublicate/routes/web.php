@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 
     Route::get('/post', [PostController::class, 'index'])->name('post');
-    // Route::get('/quiz', [QuizController::class, 'index'])->name('quiz');
+    Route::get('/create', [PostController::class, 'index'])->name('create');
 
     // Profile Routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

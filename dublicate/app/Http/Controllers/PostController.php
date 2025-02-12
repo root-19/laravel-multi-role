@@ -33,6 +33,6 @@ class PostController extends Controller
             'posting' => $request->posting,
         ]);
 
-        return redirect()->route('welcome.index')->with('success', 'Posting created successfully!');
+        return redirect()->route('welcome.post')->with('success', 'Posting created successfully!');
     }
 }
