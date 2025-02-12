@@ -15,12 +15,12 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('home') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('post')" :active="request()->routeIs('post')">
-                        {{ __('post') }}
+                    <x-nav-link :href="route('grade')" :active="request()->routeIs('grade')">
+                        {{ __('create grade') }}
                     </x-nav-link>
-                    {{-- <x-nav-link :href="route('quiz')" :active="request()->routeIs('quiz')">
-                        {{ __('quiz') }}
-                    </x-nav-link> --}}
+                    <x-nav-link :href="route('quiz')" :active="request()->routeIs('quiz')">
+                        {{ __('create quiz') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -76,10 +76,12 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('home') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('post')" :active="request()->routeIs('post')">
-                {{ __('post') }}
+            <x-responsive-nav-link :href="route('grade')" :active="request()->routeIs('grade')">
+                {{ __('crate grade') }}
             </x-responsive-nav-link>
-           
+            <x-responsive-nav-link :href="route('grade')" :active="request()->routeIs('quiz')">
+                {{ __('create quiz') }}
+            </x-responsive-nav-link>
            
         </div>
 
