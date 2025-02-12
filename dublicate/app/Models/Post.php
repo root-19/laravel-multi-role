@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,9 +8,8 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'posting']; // Allow mass assignment
+    protected $fillable = ['user_id', 'user_name', 'posting'];
 
-    // Relationship: A post belongs to a user
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -4,23 +4,24 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+                {{-- <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
-                </div>
+                </div> --}}
 
                 <!-- Navigation Links -->
-                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('home') }}
-                </x-nav-link>
-                <x-nav-link :href="route('welcome.post')" :active="request()->routeIs('welcome.post')">
-                    {{ __('post') }}
-                </x-nav-link>
-                <x-nav-link :href="route('welcome.create')" :active="request()->routeIs('welcome.create')">
-                    {{ __('create') }}
-                </x-nav-link>
-                
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('home') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('post')" :active="request()->routeIs('post')">
+                        {{ __('post') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('create')" :active="request()->routeIs('create')">
+                        {{ __('create') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -75,10 +76,10 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('home') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('welcome.post')" :active="request()->routeIs('welcome.post')">
+            <x-responsive-nav-link :href="route('post')" :active="request()->routeIs('post')">
                 {{ __('post') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('welcome.create')" :active="request()->routeIs('welcome.create')">
+            <x-responsive-nav-link :href="route('create')" :active="request()->routeIs('create')">
                 {{ __('create') }}
             </x-responsive-nav-link>
            

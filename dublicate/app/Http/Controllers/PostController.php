@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -8,20 +7,17 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    // Show all posts
     public function index() 
     {
         $posts = Post::latest()->get();
-        return view('welcome.post', compact('posts')); // ✅ Fix variable name
+        return view('welcome.post', compact('posts'));
     }
     
-    // Show the form to create a new post
     public function create()
     {
         return view('welcome.create');
     }
 
-    // Store the post in DB
     public function store(Request $request)
     {
         $request->validate([
@@ -29,8 +25,9 @@ class PostController extends Controller
         ]);
 
         Post::create([
-            'user_id' => Auth::id(), // ✅ Fix 'user-id' to 'user_id'
-            'posting' => $request->posting,
+            'user_name' => Auth::user()->name,
+            'user_id'   => Auth::id(),
+            'posting'   => $request->posting,
         ]);
 
         return redirect()->route('welcome.post')->with('success', 'Posting created successfully!');
