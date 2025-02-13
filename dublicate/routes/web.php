@@ -18,6 +18,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -127,4 +128,8 @@ Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.de
 | The following file contains additional authentication routes.
 |
 */
+Route::get('/', [PostController::class, 'index'])->name('welcome.index');
+
+// Ruta para sa pag-react (like) sa isang post
+Route::post('/posts/{post}/react', [ReactionController::class, 'store'])->name('posts.react');
 require __DIR__.'/auth.php';

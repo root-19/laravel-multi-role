@@ -18,17 +18,21 @@
                         {{ $post->posting }}
                     </div>
                     
-                    <!-- Post Footer with Icons -->
+                    <!-- Post Footer with Reaction Button -->
                     <div class="mt-4 flex items-center space-x-6">
-                        <!-- Like Button -->
-                        <button class="flex items-center space-x-1 text-gray-400 hover:text-red-500 focus:outline-none">
-                            <!-- Heart Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 18.343l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-sm">Like</span>
-                        </button>
-                        
+                        <!-- Reaction (Heart) Button -->
+                        <form action="{{ route('posts.react', $post->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="flex items-center space-x-1 text-gray-400 hover:text-red-500 focus:outline-none">
+                                <!-- Heart Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 18.343l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-sm">heart</span>
+                                <!-- Reaction Count -->
+                                <span class="ml-2 text-sm">{{ $post->reactions_count}}</span>
+                            </button>
+                        </form>
                         <!-- Comment Button -->
                         <button class="flex items-center space-x-1 text-gray-400 hover:text-blue-500 focus:outline-none">
                             <!-- Comment Icon -->

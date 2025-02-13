@@ -8,16 +8,21 @@ use App\Models\Post;
 class PostController extends Controller
 {
     // Show posts for the logged-in user.
-    public function index() 
-    {
-        $posts = Post::where('user_id', Auth::id())->latest()->get();
-        return view('welcome.post', compact('posts'));
-    }
+    // public function index() 
+    // {
+    //     $posts = Post::where('user_id', Auth::id())->latest()->get();
+    //     return view('welcome.post', compact('posts'));
+    // }
+    public function index()
+{
+    $posts = Post::withCount('reactions')->latest()->get();
+    return view('welcome.post', compact('posts'));
+}
     
     // Show posts from all users.
     public function dashboard()
     {
-        $posts = Post::latest()->get();
+        $posts = Post::withCount('reactions')->latest()->get();
         return view('welcome.welcome', compact('posts'));
     }
     // (Alternate method to show logged-in user's posts.)
