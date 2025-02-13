@@ -19,6 +19,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReactionController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -132,4 +133,5 @@ Route::get('/', [PostController::class, 'index'])->name('welcome.index');
 
 // Ruta para sa pag-react (like) sa isang post
 Route::post('/posts/{post}/react', [ReactionController::class, 'store'])->name('posts.react');
+Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
 require __DIR__.'/auth.php';

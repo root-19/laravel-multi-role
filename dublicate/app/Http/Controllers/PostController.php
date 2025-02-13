@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
-
+use App\Models\Comment;
+// use App\Models\Comment;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
 class PostController extends Controller
 {
     // Show posts for the logged-in user.
@@ -15,14 +20,14 @@ class PostController extends Controller
     // }
     public function index()
 {
-    $posts = Post::withCount('reactions')->latest()->get();
+    $posts = Post::withCount('reactions')->with('comments')->latest()->get();
     return view('welcome.post', compact('posts'));
 }
     
     // Show posts from all users.
     public function dashboard()
     {
-        $posts = Post::withCount('reactions')->latest()->get();
+        $posts = Post::withCount('reactions')->with('comments')->latest()->get();
         return view('welcome.welcome', compact('posts'));
     }
     // (Alternate method to show logged-in user's posts.)
@@ -99,5 +104,10 @@ class PostController extends Controller
     
         $post->delete();
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully!');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }
