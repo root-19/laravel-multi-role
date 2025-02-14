@@ -11,9 +11,15 @@ class ReactionController extends Controller
 {
     public function store(Request $request, $postId)
     {
-        $userId = Auth::id();
-        
-        // Suriin kung may existing reaction na ang user sa post na ito
+        // Manually check if the user is authenticated
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Please log in to react.');
+        }
+
+        $user = Auth::user();
+        $userId = $user->id;
+
+        // Check if the user already reacted to this post
         $existingReaction = Reaction::where('post_id', $postId)
             ->where('user_id', $userId)
             ->first();
@@ -24,7 +30,7 @@ class ReactionController extends Controller
 
         Reaction::create([
             'user_id'   => $userId,
-            'user_name' => Auth::user()->name,
+            'user_name' => $user->name,
             'post_id'   => $postId,
         ]);
 

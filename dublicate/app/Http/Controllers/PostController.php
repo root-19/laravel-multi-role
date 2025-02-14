@@ -5,19 +5,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\Comment;
-// use App\Models\Comment;
-// use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Illuminate\Database\Eloquent\Model;
-// use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class PostController extends Controller
 {
-    // Show posts for the logged-in user.
-    // public function index() 
-    // {
-    //     $posts = Post::where('user_id', Auth::id())->latest()->get();
-    //     return view('welcome.post', compact('posts'));
-    // }
+  
     public function index()
 {
     $posts = Post::withCount('reactions')->with('comments')->latest()->get();
@@ -45,22 +36,24 @@ class PostController extends Controller
 
     // Store a new post in the database.
     public function store(Request $request)
-    {
-        $request->validate([
-            'posting' => 'required|string|max:1000',
-        ]);
-
-        Post::create([
-            'user_name' => Auth::user()->name,
-            'user_id'   => Auth::id(),
-            'posting'   => $request->posting,
-        ]);
-
-        // Make sure you redirect to a route that exists.
-        // For example, you might want to redirect to your index or myPosts view:
-        return redirect()->route('posts.index')->with('success', 'Posting created successfully!');
+{
+    if (!Auth::check()) {
+        return redirect()->route('login')
+                         ->with('error', 'Please log in to create a post.');
     }
 
+    $request->validate([
+        'posting' => 'required|string|max:1000',
+    ]);
+
+    Post::create([
+        'user_name' => Auth::user()->name,
+        'user_id'   => Auth::id(),
+        'posting'   => $request->posting,
+    ]);
+
+    return redirect()->route('posts.index')->with('success', 'Post created successfully!');
+ }
        // Show the form to edit an existing post.
        public function edit($id)
        {

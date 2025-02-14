@@ -31,10 +31,14 @@ use App\Http\Controllers\CommentController;
 */
 
 // Homepage
-Route::get('/', function () {
+Route::get('/index', function () {
     return view('index');
 })->name('index');
 
+// Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+
+  
 /*
 |--------------------------------------------------------------------------
 | Guest Routes

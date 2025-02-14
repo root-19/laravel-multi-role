@@ -7,11 +7,17 @@
             @foreach ($posts as $post)
                 <li class="p-6 bg-gray-800 rounded-lg shadow">
                     <!-- Post Header -->
-                    <div class="flex items-center justify-between">
-                        <div class="text-sm text-gray-300">
-                            <strong>{{ $post->user_name }}</strong>
+                    <div class="flex items-center space-x-3">
+                        <!-- Small circular avatar with the first letter -->
+                        <div class="w-10 h-10 bg-gray-500 text-white rounded-full flex items-center justify-center font-bold">
+                            {{ strtoupper(substr($post->user_name, 0, 1)) }}
+                        </div>
+                        <!-- Full user name displayed outside the circle -->
+                        <div class="text-sm text-gray-300 font-bold">
+                            {{ $post->user_name }}
                         </div>
                     </div>
+                    
                     
                     <!-- Post Content -->
                     <div class="mt-4 text-lg text-white">
@@ -58,13 +64,24 @@
                         
                         <!-- Display Comments -->
                         @if($post->comments->count())
-                            <div class="space-y-2">
-                                @foreach($post->comments as $comment)
-                                    <div class="p-2 bg-gray-700 rounded">
-                                        <strong class="text-sm text-white">{{ $comment->user_name }}</strong>
-                                        <p class="text-sm text-gray-300">{{ $comment->comment }}</p>
+                        <div class="space-y-2">
+                        @foreach($post->comments as $comment)
+                            <div class="p-2 bg-gray-700 rounded flex items-start space-x-3">
+                                <!-- Avatar with first letter of commenter's name -->
+                                <div class="flex-shrink-0">
+                                    <div class="w-10 h-10 bg-gray-500 text-white rounded-full flex items-center justify-center font-bold">
+                                        {{ strtoupper(substr($comment->user_name, 0, 1)) }}
                                     </div>
-                                @endforeach
+                                </div>
+                                <!-- Comment content -->
+                                <div>
+                                    <div class="text-sm text-gray-300 font-bold">
+                                        {{ $comment->user_name }}
+                                    </div>
+                                    <p class="text-sm text-white">{{ $comment->comment }}</p>
+                                </div>
+                            </div>
+                        @endforeach
                             </div>
                         @endif
                     </div>
@@ -73,19 +90,6 @@
         </ul>
     </div>
 
-    <!-- Script to toggle the comment section display -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggleButtons = document.querySelectorAll('.toggle-comment-btn');
-            toggleButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const targetId = this.getAttribute('data-target');
-                    const commentSection = document.getElementById(targetId);
-                    if (commentSection) {
-                        commentSection.classList.toggle('hidden');
-                    }
-                });
-            });
-        });
-    </script>
+   
+  
 @endsection

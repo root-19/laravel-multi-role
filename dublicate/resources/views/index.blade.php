@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Threads</title>
+        <title>NextGen Threads - Programming Forum</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -14,98 +14,65 @@
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @else
             <style>
-                /* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */
-                /* (Your existing Tailwind fallback CSS styles here) */
+                /* Tailwind fallback styles */
             </style>
         @endif
     </head>
-    <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-        <!-- Header: Contains Home link, Title, and Authentication Navigation -->
-        <header class="grid grid-cols-3 items-center gap-2 py-10">
-            <!-- Left Column: Home Link -->
-            <div class="flex justify-start">
-                {{-- <a href="{{ url('/') }}"
-                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                    Home
-                </a> --}}
-            </div>
-
-            <!-- Center Column: Page Title -->
-            <div class="flex justify-center">
-                <h1 class="text-2xl font-bold">Threads</h1>
-            </div>
-
-            <!-- Right Column: Authentication Navigation -->
-            <div class="flex justify-end">
+    <body class="font-sans antialiased dark:bg-gray-900 dark:text-gray-300">
+        <header class="flex justify-between items-center px-6 py-4 bg-gray-800 text-white">
+            <h1 class="text-2xl font-bold text-blue-500">NextGen Threads</h1>
+            <nav>
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ url('/dashboard') }}"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                            Dashboard
-                        </a>
+                        <a href="{{ url('/dashboard') }}" class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-500">Dashboard</a>
                     @else
-                        <a href="{{ route('login') }}"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                            Log in
-                        </a>
+                        <a href="{{ route('login') }}" class="px-4 py-2 bg-blue-500 rounded hover:bg-blue-800">Log in</a>
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                Register
-                            </a>
+                            <a href="{{ route('register') }}" class="px-4 py-2 bg-gray-700 rounded hover:bg-gray-600">Register</a>
                         @endif
                     @endauth
                 @endif
-            </div>
+            </nav>
         </header>
 
-        <!-- Main Content: About Threads -->
-        <main class="max-w-5xl mx-auto px-4">
-            <!-- Section: Introduction to Threads -->
-            <section class="mb-12">
-                <h2 class="text-3xl font-bold mb-4">Welcome to Threads</h2>
-                <p class="text-gray-700 dark:text-gray-300">
-                    Threads are the heart of our community! Here, you can dive into discussions on a wide range of topics, share your ideas, ask questions, and connect with others.
-                </p>
+        <main class="max-w-5xl mx-auto px-4 py-8">
+            <section class="mb-10 text-center">
+                <h2 class="mb-3 text-gray-500 dark:text-gray-400 first-line:uppercase first-line:tracking-widest first-letter:text-7xl first-letter:font-bold first-letter:text-gray-900 dark:first-letter:text-gray-100 first-letter:me-3 first-letter:float-start"">Welcome to NextGen Threads</h2>
+                <p class="text-lg text-gray-500 dark:text-gray-400">  A vibrant, community-driven forum where programmers of all skill levels come together to discuss coding challenges, share innovative solutions, and exchange industry insights. Whether you're a beginner looking for guidance, a seasoned developer troubleshooting complex issues, or an expert offering mentorship, this platform fosters a supportive environment for continuous learning. Engage in discussions about programming languages, software development trends, debugging strategies, and best practices. Collaborate on open-source projects, seek career advice, and stay updated with the latest technological advancements. Our goal is to build a space where knowledge flows freely, ideas turn into solutions, and every developer finds the support they need to grow and succeed..</p>
             </section>
 
-            <!-- Section: Sample Threads Data -->
-            <section class="mb-12">
-                <h2 class="text-2xl font-bold mb-4">Latest Threads</h2>
-                <div class="space-y-6">
+            <!-- Latest Threads Section -->
+            <section class="mb-10">
+                <h2 class="text-2xl font-semibold mb-4">Latest Programming Discussions</h2>
+                <div class="grid gap-6">
                     <!-- Thread 1 -->
-                    <article class="p-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow">
-                        <h3 class="text-xl font-semibold mb-2">Thread: Data  Insights</h3>
-                        <p class="text-gray-800 dark:text-gray-200">
-                            This thread is all about sharing insights on "Data". Discuss the latest trends, share your experiences, and learn from the community.
-                        </p>
-                        <a href="#" class="inline-block mt-3 text-blue-600 dark:text-blue-400 hover:underline">
-                            Read more...
-                        </a>
+                    <article class="p-6 bg-gray-700 rounded-lg shadow">
+                        <h3 class="text-xl font-semibold mb-2">Debugging JavaScript: Best Practices</h3>
+                        <p>Discuss various debugging techniques, common pitfalls, and best tools for debugging JavaScript applications.</p>
+                        <a href="#" class="text-blue-400 hover:underline">Join the discussion...</a>
                     </article>
 
                     <!-- Thread 2 -->
-                    <article class="p-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow">
-                        <h3 class="text-xl font-semibold mb-2">Thread: Exploring New Data Concepts</h3>
-                        <p class="text-gray-800 dark:text-gray-200">
-                            Dive into discussions about emerging data concepts. Whether you're a beginner or an expert, join the conversation and share your knowledge.
-                        </p>
-                        <a href="#" class="inline-block mt-3 text-blue-600 dark:text-blue-400 hover:underline">
-                            Read more...
-                        </a>
+                    <article class="p-6 bg-gray-700 rounded-lg shadow">
+                        <h3 class="text-xl font-semibold mb-2">Python vs Java: Which One to Choose?</h3>
+                        <p>A comparative discussion on Python and Java, their use cases, performance, and best practices.</p>
+                        <a href="#" class="text-blue-400 hover:underline">Share your thoughts...</a>
+                    </article>
+
+                    <!-- Thread 3 -->
+                    <article class="p-6 bg-gray-700 rounded-lg shadow">
+                        <h3 class="text-xl font-semibold mb-2">How to Optimize SQL Queries?</h3>
+                        <p>Share and learn tips on writing efficient SQL queries to improve database performance.</p>
+                        <a href="#" class="text-blue-400 hover:underline">Learn more...</a>
                     </article>
                 </div>
             </section>
 
-            <!-- Section: About the Platform -->
-            <section class="mb-12">
-                <h2 class="text-2xl font-bold mb-4">About Our Threads Platform</h2>
-                <p class="text-gray-700 dark:text-gray-300">
-                    Our platform is designed to facilitate engaging discussions and knowledge sharing. Whether you're here to ask questions, share your expertise, or just browse through interesting topics, we welcome you to be a part of our growing community.
-                </p>
-                <p class="text-gray-700 dark:text-gray-300 mt-4">
-                    Enjoy exploring, and feel free to start your own thread to contribute to the discussion!
-                </p>
+            <!-- About the Forum -->
+            <section class="mb-10">
+                <h2 class="text-2xl font-semibold mb-4">About NextGen Threads</h2>
+                <p>This forum is dedicated to programmers and tech enthusiasts who love discussing coding challenges, project ideas, and industry trends.</p>
+                <p class="mt-4">Whether you're a beginner or an expert, join us to share knowledge, ask questions, and collaborate on projects.</p>
             </section>
         </main>
     </body>
