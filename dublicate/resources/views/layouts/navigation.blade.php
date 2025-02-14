@@ -50,7 +50,12 @@
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
+<<<<<<< HEAD
                             <button type="submit" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+=======
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault(); this.closest('form').submit();">
+>>>>>>> b6acc41366dcb3ce9699670e044b9b6a926ac88e
                                 {{ __('Log Out') }}
                             </button>
                         </form>
@@ -83,8 +88,12 @@
             {{-- Uncomment if you add a create route:
             <x-responsive-nav-link :href="route('create')" :active="request()->routeIs('create')">
                 {{ __('create') }}
+<<<<<<< HEAD
             </x-responsive-nav-link>
             --}}
+=======
+            </x-responsive-nav-link> --}}
+>>>>>>> b6acc41366dcb3ce9699670e044b9b6a926ac88e
         </div>
 
         <!-- Responsive Settings Options (Authenticated Users Only) -->
@@ -103,7 +112,12 @@
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
+<<<<<<< HEAD
                     <button type="submit" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+=======
+                    <x-responsive-nav-link :href="route('logout')"
+                            onclick="event.preventDefault(); this.closest('form').submit();">
+>>>>>>> b6acc41366dcb3ce9699670e044b9b6a926ac88e
                         {{ __('Log Out') }}
                     </button>
                 </form>
@@ -112,3 +126,4 @@
         @endauth
     </div>
 </nav>
+
