@@ -1,10 +1,9 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 font-serif">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <!-- Logo (uncomment if needed) -->
-                
+                <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <img src="{{ asset('image/nextgen-logo.png') }}" class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
@@ -14,16 +13,15 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('home') }}
+                        {{ __('Home') }}
                     </x-nav-link>
                     <x-nav-link :href="route('post')" :active="request()->routeIs('post')">
-                        {{ __('post') }}
+                        {{ __('Post') }}
                     </x-nav-link>
-                    {{-- Uncomment if you add a create route:
-                    <x-nav-link :href="route('create')" :active="request()->routeIs('create')">
-                        {{ __('create') }}
-                    </x-nav-link>
-                    --}}
+                    {{-- Uncomment if you add a create route --}}
+                    {{-- <x-nav-link :href="route('create')" :active="request()->routeIs('create')">
+                        {{ __('Create') }}
+                    </x-nav-link> --}}
                 </div>
             </div>
 
@@ -43,21 +41,17 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link :href="route('profile')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-<<<<<<< HEAD
-                            <button type="submit" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
-=======
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault(); this.closest('form').submit();">
->>>>>>> b6acc41366dcb3ce9699670e044b9b6a926ac88e
                                 {{ __('Log Out') }}
-                            </button>
+                            </x-dropdown-link>
                         </form>
                     </x-slot>
                 </x-dropdown>
@@ -80,20 +74,15 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('home') }}
+                {{ __('Home') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('post')" :active="request()->routeIs('post')">
-                {{ __('post') }}
+                {{ __('Post') }}
             </x-responsive-nav-link>
-            {{-- Uncomment if you add a create route:
-            <x-responsive-nav-link :href="route('create')" :active="request()->routeIs('create')">
-                {{ __('create') }}
-<<<<<<< HEAD
-            </x-responsive-nav-link>
-            --}}
-=======
+            {{-- Uncomment if you add a create route --}}
+            {{-- <x-responsive-nav-link :href="route('create')" :active="request()->routeIs('create')">
+                {{ __('Create') }}
             </x-responsive-nav-link> --}}
->>>>>>> b6acc41366dcb3ce9699670e044b9b6a926ac88e
         </div>
 
         <!-- Responsive Settings Options (Authenticated Users Only) -->
@@ -105,25 +94,20 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
+                <x-responsive-nav-link :href="route('profile')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-<<<<<<< HEAD
-                    <button type="submit" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
-=======
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault(); this.closest('form').submit();">
->>>>>>> b6acc41366dcb3ce9699670e044b9b6a926ac88e
                         {{ __('Log Out') }}
-                    </button>
+                    </x-responsive-nav-link>
                 </form>
             </div>
         </div>
         @endauth
     </div>
 </nav>
-

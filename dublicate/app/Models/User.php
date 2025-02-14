@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_image', 
+        'cover_photo',
+         'bio',
         'role'
     ];
 
@@ -46,4 +49,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function followers()
+{
+    return $this->hasMany(Follow::class, 'following_id');
+}
+
+public function following()
+{
+    return $this->hasMany(Follow::class, 'follower_id');
+}
+
+public function isFollowing($userId)
+{
+    return $this->following()->where('following_id', $userId)->exists();
+}
 }

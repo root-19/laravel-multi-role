@@ -5,13 +5,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\Comment;
+// use App\Models\User;
 
 class PostController extends Controller
 {
   
     public function index()
 {
-    $posts = Post::withCount('reactions')->with('comments')->latest()->get();
+    $posts = Post::where('user_id', auth()->id())->latest()->get();
+
     return view('welcome.post', compact('posts'));
 }
     
@@ -19,7 +21,9 @@ class PostController extends Controller
     public function dashboard()
     {
         $posts = Post::withCount('reactions')->with('comments')->latest()->get();
-        return view('welcome.welcome', compact('posts'));
+        $users = \App\Models\User::orderBy('name')->get(); // Fetch all users
+    
+        return view('welcome.welcome', compact('posts', 'users')); // Pass $users to the view
     }
     // (Alternate method to show logged-in user's posts.)
     public function myPosts()
@@ -44,12 +48,20 @@ class PostController extends Controller
 
     $request->validate([
         'posting' => 'required|string|max:1000',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
+    $imagePath = null;
+
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('posts', 'public');
+    }
+
     Post::create([
-        'user_name' => Auth::user()->name,
-        'user_id'   => Auth::id(),
-        'posting'   => $request->posting,
+        'user_id' => auth()->id(),
+        'user_name' => auth()->user()->name,  
+        'posting' => $request->posting,
+        'image' => $imagePath,
     ]);
 
     return redirect()->route('posts.index')->with('success', 'Post created successfully!');

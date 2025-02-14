@@ -20,6 +20,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReactionController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\FollowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,10 +88,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/create', [PostController::class, 'index'])->name('create');
 
     // Profile routes for authenticated users
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    // Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
+    Route::get('/profile', [ProfileController::class, 'profile'])->name('profile')->middleware('auth');
+    Route::get('/profile/{id}', [ProfileController::class, 'visitedProfile'])->name('visited.profile');
+    Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+     Route::post('/profile', [FollowController::class, 'toggleFollow'])->name('follow.toggle');
+   
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -138,4 +147,10 @@ Route::get('/', [PostController::class, 'index'])->name('welcome.index');
 // Ruta para sa pag-react (like) sa isang post
 Route::post('/posts/{post}/react', [ReactionController::class, 'store'])->name('posts.react');
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
+
+Route::get('/welcome', [UserController::class, 'index'])->name('welcome');
+
+// Route for user profiles
+Route::get('/', [PostController::class, 'dashboard'])->name('welcome.dashboard');
+Route::get('/profile/{user}', [UserController::class, 'show'])->name('welcome.profile');
 require __DIR__.'/auth.php';
