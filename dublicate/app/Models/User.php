@@ -64,4 +64,13 @@ public function isFollowing($userId)
 {
     return $this->following()->where('following_id', $userId)->exists();
 }
+
+public function index()
+{
+    $users = User::withCount('followers') // Count followers
+        ->orderByDesc('followers_count') // Order by highest follower count first
+        ->get();
+
+    return view('welcome.welcome', compact('users'));
+}
 }

@@ -3,24 +3,46 @@
 @section('content')
 <div class="flex">
     <!-- Sidebar -->
-    <div class="hidden md:flex flex-col w-64 bg-gray-900 text-white h-screen fixed p-6 shadow-lg overflow-y-auto">
+    <div class="hidden md:flex flex-col w-64 bg-gray-900 text-white h-screen fixed p-4 shadow-lg">
         <h1 class="text-3xl font-bold mb-6 text-white font-serif">Threaders</h1>
-        <ul class="space-y-6">
-            @foreach ($users as $user)
-            <a href="{{ route('visited.profile', $user->id) }}" 
-               class="flex items-center space-x-3 mb-4 p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
-                <div class="w-12 h-12  text-white rounded-full flex items-center justify-center text-lg font-bold">
-                    <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : 'https://via.placeholder.com/150' }}" class="w-12 h-12 rounded-full " />
-                </div>
-                <div class="text-sm text-gray-300 font-semibold font-serif"> 
-                    {{ $user->name }}
-                    <p class="text-gray-400 mt-2 text-blue-500 font-bold"><span id="follow-count">{{ $user->followers->count() }}+</span> Followers</p>
-                </div>
-            </a>
-        @endforeach
+        
+        <!-- Scrollable container with hidden scrollbar -->
+        <ul class="space-y-6 max-h-96 overflow-y-auto custom-scrollbar">
+            @foreach ($users->sortByDesc(fn($user) => $user->followers->count()) as $user)
+                <a href="{{ route('visited.profile', $user->id) }}" 
+                   class="flex items-center space-x-3 mb-4 p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+                    <div class="w-12 h-12 text-white rounded-full flex items-center justify-center text-lg font-bold">
+                        @if ($user->profile_image)
+                            <img src="{{ asset('storage/' . $user->profile_image) }}" class="w-12 h-12 rounded-full" alt="Profile Image" />
+                        @else
+                            <div class="w-12 h-12 text-white rounded-full flex items-center justify-center text-lg p-1 font-bold ring-2 ring-gray-300 dark:ring-gray-500 bg-gray-700">
+                                {{ strtoupper(substr($user->name, 0, 1)) }}
+                            </div>
+                        @endif
+                    </div>
+                    <div class="text-sm text-gray-300 font-semibold font-serif"> 
+                        {{ $user->name }}
+                        <p class="text-gray-400 mt-2 text-blue-500 font-bold">
+                            <span id="follow-count">{{ $user->followers->count() }}+</span> Followers
+                        </p>
+                    </div>
+                </a>
+            @endforeach
+        </ul>
     </div>
     
-
+    <!-- Custom CSS for hiding scrollbar -->
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 0px;
+        }
+    
+        .custom-scrollbar {
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+        }
+    </style>
+    
     <!-- Main Content -->
     <div class="flex-1 max-w-3xl mx-auto px-4 py-6">
         <h1 class="text-3xl font-bold mb-6 text-white font-serif">Threads</h1>
