@@ -86,6 +86,8 @@ Route::middleware('auth')->group(function () {
     // Post routes within auth group (note: duplicate definitions appear later)
     Route::get('/post', [PostController::class, 'index'])->name('post');
     Route::get('/create', [PostController::class, 'index'])->name('create');
+    Route::get('/search-user', [UserController::class, 'index'])->name('search.user');
+
 
     // Profile routes for authenticated users
     // Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
@@ -96,7 +98,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
      Route::post('/profile', [FollowController::class, 'toggleFollow'])->name('follow.toggle');
-   
+
+    //  Route::get('/search-user', [UserController::class, 'searchUser'])->name('search.user');
+    Route::get('/search-user', [UserController::class, 'searchUser'])->name('search.user');
+Route::get('/viewed-profile/{id}', [UserController::class, 'viewProfile'])->name('view.profile');
+
+    //  Route::get('/view-profile/{id}', [UserController::class, 'viewProfile'])->name('view.profile');
 });
 
 
@@ -134,6 +141,8 @@ Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edi
 Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
 Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Authentication Routes File
@@ -153,4 +162,7 @@ Route::get('/welcome', [UserController::class, 'index'])->name('welcome');
 // Route for user profiles
 Route::get('/', [PostController::class, 'dashboard'])->name('welcome.dashboard');
 Route::get('/profile/{user}', [UserController::class, 'show'])->name('welcome.profile');
+
+// Route::get('/search-user', [UserController::class, 'searchUser'])->name('searchUser');
+
 require __DIR__.'/auth.php';

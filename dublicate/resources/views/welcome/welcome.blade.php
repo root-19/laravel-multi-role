@@ -44,10 +44,10 @@
     </style>
     
     <!-- Main Content -->
-    <div class="flex-1 max-w-3xl mx-auto px-4 py-6">
+    <div class="flex-1 max-w-2xl mx-auto px-4 py-6">
         <h1 class="text-3xl font-bold mb-6 text-white font-serif">Threads</h1>
 
-        <ul class="space-y-6 font-serif">
+        <ul class="space-y-2 font-serif">
             @foreach ($posts as $post)
                 <li class="p-6 bg-gray-800 rounded-lg shadow">
                     <!-- Post Header -->
@@ -67,7 +67,7 @@
          
                     @if ($post->image)
     
-        <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="mt-2 rounded-lg w-64 h-auto object-cover">
+        <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="max-w-xl w-full h-[12.5rem] object-fill rounded-lg"">
 
 @endif
 
@@ -128,6 +128,33 @@
             @endforeach
         </ul>
     </div>
+    <!-- Right Sidebar (Hot Threads) -->
+    <aside class="hidden md:flex flex-col w-64 bg-gray-900 text-white h-screen fixed right-0 p-4 shadow-lg">
+        <h1 class="text-xl font-bold mb-4 text-white font-serif">🔥 Hot Threads</h1>
+        <ul class="space-y-4 overflow-y-auto custom-scrollbar">
+            @foreach ($hotThreads as $hotPost)
+                <li class="p-4 bg-gray-800 rounded-lg shadow">
+                    <a href="#" class="text-lg font-bold text-blue-400 hover:underline">
+                        {{ Str::limit($hotPost->posting, 50) }}
+                    </a>
+                    <p class="text-gray-400 text-sm mt-2">By {{ $hotPost->user_name }}</p>
+                    <p class="text-gray-500 text-xs">❤️ {{ $hotPost->reactions_count }} Likes</p>
+                </li>
+            @endforeach
+        </ul>
+    </aside>
+</div>
+
+<style>
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 0px;
+    }
+    .custom-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
+
 </div>
 @endsection
 

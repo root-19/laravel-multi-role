@@ -19,9 +19,10 @@
                         {{ __('Post') }}
                     </x-nav-link>
                     {{-- Uncomment if you add a create route --}}
-                    {{-- <x-nav-link :href="route('create')" :active="request()->routeIs('create')">
-                        {{ __('Create') }}
-                    </x-nav-link> --}}
+                    <x-nav-link :href="route('search.user')" :active="request()->routeIs('search.user')">
+                        {{ __('Search') }}
+                    </x-nav-link>
+                    
                 </div>
             </div>
 
@@ -80,9 +81,11 @@
                 {{ __('Post') }}
             </x-responsive-nav-link>
             {{-- Uncomment if you add a create route --}}
-            {{-- <x-responsive-nav-link :href="route('create')" :active="request()->routeIs('create')">
-                {{ __('Create') }}
-            </x-responsive-nav-link> --}}
+            <x-responsive-nav-link :href="route('search.user')" :active="request()->routeIs('search.user')">
+                {{ __('Search') }}
+            </x-responsive-nav-link>
+            
+          
         </div>
 
         <!-- Responsive Settings Options (Authenticated Users Only) -->

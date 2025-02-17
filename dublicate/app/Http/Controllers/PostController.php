@@ -21,10 +21,19 @@ class PostController extends Controller
     public function dashboard()
     {
         $posts = Post::withCount('reactions')->with('comments')->latest()->get();
-        $users = \App\Models\User::orderBy('name')->get(); // Fetch all users
+        $users = \App\Models\User::orderBy('name')->get();
+
+        //get 10 post with mostreaction 
+        $hotThreads = Post::withCount('reactions')
+        ->orderByDesc('reactions_count')
+        ->take(10)
+        ->get();
     
-        return view('welcome.welcome', compact('posts', 'users')); // Pass $users to the view
+        return view('welcome.welcome', compact('posts', 'users', 'hotThreads')); 
     }
+
+
+
     // (Alternate method to show logged-in user's posts.)
     public function myPosts()
     {

@@ -24,4 +24,22 @@ class UserController extends Controller
         $user = User::findOrFail($id); // Get the user by ID
         return view('visited-profile', compact('user'));
     }
+    public function searchUser(Request $request)
+    {
+        $query = $request->input('q');
+    
+        if ($request->ajax()) {
+            $users = User::where('name', 'LIKE', "%{$query}%")->get();
+            return response()->json($users); // Return JSON for AJAX
+        }
+    
+        $users = User::where('name', 'LIKE', "%{$query}%")->get();
+        return view('welcome.search-user', compact('users', 'query')); // Return the normal view
+    }    
+
+    public function viewProfile($id)
+    {
+        $user = User::findOrFail($id);
+        return view('welcome.visited-profile', compact('user'));
+    }
 }
